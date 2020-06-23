@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoofd zakelijk</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/hoofdZakelijk.css}">
+</head>
+<body>
+<h1>International Bank of HvA</h1>
+<form>
+<h2>Afdeling: Zakelijk Rekening</h2>
+    <div style="text-align: center">
+    <button formaction="/bedrijven_met_hoogste_saldo" class="button" style="background-color: #47a7ff"
+            name="terug" value="terug" type="submit">Lijst van 10 bedrijven met hoogste saldo</button>
+    <button formaction="/gemiddelde_saldo_per_sector" class="button" style="background-color: #28a745"
+            name="terug" value="terug" type="submit">Lijst van gemiddelde saldo per sector</button>
+    <button formaction="/meest_actieve_bedrijven" class="button" style="background-color: #3e64ff"
+            name="terug" value="terug" type="submit">Lijst van 10 meest actieve bedrijven</button>
+    <button class="button button_position" name="terug" value="terug" type="button" onclick="history.back()">
+            Uitloggen</button>
+    </div>
+</form>
+</body>
+</html>

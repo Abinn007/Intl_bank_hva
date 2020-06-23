@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welkom</title>
+    <!--<link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/welkom.css}">-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenLayout.css}">
+</head>
+<body>
+    <br>
+    <h1>International Bank of HvA</h1>
+    <form th:object="${klant}">
+    <h2>Welkom <span th:text="${klant.getVoornaam()}"></span> <span th:text="${klant.getTussenvoegsel()}"></span> <span th:text="${klant.getAchternaam()}"></span></h2>
+        <div class="table">
+        <table>
+            <tr>
+                <td><a href="openRekening">REKENING OPENEN</a></td>
+            </tr>
+            <tr>
+                <td><a href="rekeningOverzicht">REKENING OVERZICHT</a></td>
+            </tr>
+        </table>
+        </div>
+        <br><br>
+        <div class="button_position">
+        <button class="button" style="background-color: tomato" name="submit" formaction="/home" value="logout" type="submit">UITLOGGEN</button>
+        </div>
+    </form>
+</body>
+</html>

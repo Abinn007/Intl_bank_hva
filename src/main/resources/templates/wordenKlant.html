@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nieuwe klant</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/wordenKlant.css}">
+    <script type="application/javascript" th:src="@{js/wordenKlant.js}"></script>
+</head>
+<body>
+
+<form th:action="@{registreren_klant}" method="post" th:object="${klantBean}">
+    <h1> International Bank of HvA</h1>
+    <h2> Nieuwe klant formulier </h2>
+    <h3> Vul uw gegevens in </h3>
+    <p>Persoonlijke gegevens</p>
+    <div style="text-align: left" id="radio">
+        <label><input name="radiobutton" type="radio" value="De heer" th:field="*{aanhef}">De heer</label>
+        <label> <input name="radiobutton" type="radio" value="Mevrouw" th:field="*{aanhef}">Mevrouw</label>
+    </div>
+
+    <div class="grid-container2">
+        <label>Voorletters:*
+            <input class="uppercase input2" name="voorletters" th:field="*{voorletters}" pattern="[a-zA-Z. ]*"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required/> </label>
+
+        <label>Achternaam:*
+            <input class="capitalize input2" name="achternaam" th:field="*{achternaam}" pattern="[a-zA-Z ]*"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
+    </div>
+
+    <div class="grid-container2 ">
+        <label> Voornaam:*
+            <input class="capitalize input2" name="voornaam" th:field="*{voornaam}" pattern="[a-zA-Z ]*"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
+
+        <label>Tussenvoegsel:
+            <input class="input2" name="tussenvoegsel" th:field="*{tussenvoegsel}" pattern="[a-zA-Z ]*"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')"> </label>
+    </div>
+
+    <div class="grid-container2">
+        <label>BSN:*
+            <input class="input2" name="bsn" th:field="*{bsn}" placeholder="123456789" maxlength="9"
+                   pattern="[0-9]{9,9}"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
+
+        <label>Geboortedatum:*
+            <input style="color: dimgray" class=" input2" name="geboortedatum" type="date" th:field="*{geboortedatum}"
+                   required></label>
+    </div>
+
+    <div class="grid-container2">
+        <label>Emailadres:*
+            <input class="input2" type="email" name="emailadres" th:field="*{emailadres}" placeholder="test@example.com"
+                   required> </label>
+
+        <label>Gebruikersnaam:*
+            <input class="input2" th:field="*{gebruikersnaam}" required> </label>
+    </div>
+
+    <div class="grid-container2">
+        <label>Wachtwoord:*
+            <input class="input2" id="password" name="password" type="password" required th:field="*{wachtwoord}"
+                   placeholder="min 8 tekens,1hoofd-,1kleinletter & 1cijfer" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,}"
+                   oninvalid="valid_password(this)" oninput="setCustomValidity('')"></label>
+        <label>Bevestig&nbsp;wachtwoord:*
+            <input class="input2" id="confirm_password" name="confirm_password" type="password"
+                   placeholder="wachtwoord bevestigen"
+                   onkeyup="validatePassword()" oninput="setCustomValidity('')" required></label>
+    </div>
+
+    <p>Adresgegevens</p>
+    <div class="grid-container3">
+        <label>Postcode:*
+            <input class="uppercase input3" name="postcode" th:field="*{postcode}" maxlength="6"
+                   pattern="[0-9]{4}[A-Za-z]{2}"
+                   oninvalid="valid_postcode(this)" oninput="this.setCustomValidity('')"
+                   placeholder="1111AB" required></label>
+
+        <label>Huisnummer:*
+            <input class="input3" name="huisnummer" th:field="*{huisnummer}" pattern="[0-9]{1,}"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
+
+        <label>Toevoeging:
+            <input class="input3" name="toevoeging" maxlength="10" th:field="*{toevoeging}"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')"> </label>
+    </div>
+
+    <div class="grid-container2">
+        <label>Straat:*
+            <input class="capitalize input2" name="straatnaam" th:field="*{straat}" pattern="[a-zA-Z- ]*"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
+
+
+        <label>Woonplaats:*
+            <input class="capitalize input2" name="woonplaats" th:field="*{woonplaats}" pattern="[a-zA-Z ]*"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
+    </div>
+    <br>
+
+    <div class="button_position">
+        <button class="button" style=" background-color: #28a745;" name="submit" value="registreren"
+                type="submit">Registreren
+        </button>
+        <button class="button" style="background-color: tomato;" name="terug" value="home" type="button"
+                onclick="history.back()">Annuleren
+        </button>
+    </div>
+</form>
+</body>
+</html>

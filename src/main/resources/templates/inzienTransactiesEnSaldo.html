@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inzien Transacties en Saldo</title>
+  <!--  <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenLayout.css}">
+
+</head>
+
+<body>
+<br>
+<h1>International Bank of HvA</h1>
+
+
+<form th:action="@{inzienTransactiesEnSaldo}" method="get" th:object="${transactieList}">
+    <h2>Overzicht transacties</h2>
+    <div class="table">
+    <table>
+        <tr>
+            <td>IBAN <span th:text="${rekeningnummer}"></span></td>
+            <td>Saldo <span th:text="${saldo}"></span></td>
+        </tr>
+    </table>
+    </div>
+    <br><br>
+<!--</form>
+<form th:action="@{inzienTransactiesEnSaldo}" method="get" >-->
+    <div class="table">
+    <table>
+        <tr>
+            <th>Datum transactie</th><th>Credit rekening</th><th>Debet rekening</th><th>Beschrijving</th><th>Bedrag</th>
+        </tr>
+        <tr th:each="transactie: ${transactieList}">
+
+            <td th:text="${transactie.datumTransactie}"></td>
+            <td th:text="${transactie.rekeningNrCredit}"></td>
+            <td th:text="${transactie.rekeningNrDebet}"></td>
+            <td th:text="${transactie.beschrijving}"></td>
+            <td th:text="${#numbers.formatDecimal(transactie.transactieBedrag, 1, 'COMMA', 2, 'POINT')}"></td>
+
+        </tr>
+    </table>
+    </div>
+    <br>
+
+<button class="button" style="background-color: orange" name="terug" value="geldOvermaken" type="button" onclick="history.back()">Terug</button>
+
+</body>
+</html>

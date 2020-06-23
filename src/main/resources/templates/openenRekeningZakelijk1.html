@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/openenRekening.css}">
+    <title>Zakelijk Rekening Openen</title>
+</head>
+<body>
+    <h1> International Bank of HvA </h1>
+    <h2> Een zakelijk rekening openen voor: </h2>
+    <h3> <span th:text="${klant.voornaam} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}"></span></h3>
+    <h3> De volgende gegevens zullen aan uw rekening gekopeld worden: </h3>
+    <form th:action="@{rekening_zakelijk}" method="post">
+        <table>
+            <tr>
+                <td>Naam:
+                <label><span th:text="${klant.voorletters} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <td>BSN:
+                <label><span th:text="${klant.bsn}"></span></label>
+                </td>
+            </tr>
+        </table><br><br>
+        <div class="button_position">
+            <button class="button" style="background-color: #28a745"
+                    name="submit" type="submit">VERDER</button>
+            <button class="button" style="background-color: orange"
+                    name="terug" value="goToWelcome" type="button" onclick="history.back()">TERUG</button>
+         </div>
+    </form>
+</body>
+</html>

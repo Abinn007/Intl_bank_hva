@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Top 10 Particuliere Klanten</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/hoofdParticulierenHoogsteSaldo.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabel.css}">
+</head>
+<body>
+<div>
+    <h1> International Bank of HvA</h1>
+    <h3>Overzicht Top 10 Particulier Klanten</h3>
+    <form th:action="@{hoofdParticulierenHoogsteSaldo}" method="get" th:object="${klantLijst}" style="margin-left:550px; margin-right:180px;">
+        <table style="float:left; width:15%;">
+            <tr style="background-color:#32A9EE; color:white; font-size:17px">
+                <th>Klant Nr.</th>
+            </tr>
+            <tr th:each="klant : ${klantLijst}">
+                <td style="text-align: center" th:text="${klant.klantNr}">Klant Nr.</td>
+            </tr>
+        </table>
+        <table style="float:left; width:30%; border:1px white;">
+            <tr style="background-color:#32A9EE; color:white; font-size:17px">
+                <th>Klant Naam</th>
+            </tr>
+            <tr th:each="klant : ${klantLijst}">
+                <td style="text-align: center" th:text="${klant.voorletters} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}">Klant Naam</td>
+            </tr>
+        </table>
+        <table style="float:left; width:20%;">
+            <tr style="background-color:#32A9EE; color:white; font-size:17px">
+                <th>Saldo</th>
+            </tr>
+            <tr th:each="rekening : ${topTienKlantenLijst}">
+                <td style="text-align: center" th:text="${#numbers.formatDecimal(rekening.saldo, 1, 'COMMA', 2, 'POINT')}">Total Saldo</td>
+            </tr>
+        </table>
+    </form>
+</div>
+<button class="button" name="terug" value="terug" type="button" onclick="history.back()">Terug</button>
+</body>
+</html>

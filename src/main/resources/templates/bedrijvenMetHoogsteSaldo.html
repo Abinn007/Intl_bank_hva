@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedrijven Lijst met hoogste saldo</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+</head>
+<body>
+<div align="center">
+    <h1>International Bank of HvA</h1><br>
+<form th:action="@{/bedrijven_met_hoogste_saldo}" method="get" th:object="${bedrijfsLijst}">
+<table>
+    <tr>
+        <th colspan="4" style="background-color:darkgrey; color:white; padding:1px; font-size:20px">
+            <p>Top tien bedrijven met hoogste saldo</p>
+        </th>
+    </tr>
+    <tr style="background-color:#32A9EE;color:white;font-size: 17px">
+         <th>S.nr.</th>
+         <th style="text-align: left">Bedrijfsnaam</th>
+         <th>Totaal Saldo</th>
+         <th>Bedrijfsgegevens</th>
+         <tr th:each="rekening,iterationStatus: ${bedrijfsLijst}">
+         <td style="text-align: center" th:text="${iterationStatus.count}"></td>
+         <td th:text="${rekening.bedrijfsnaam}"></td>
+         <td style="text-align: center" th:text="${#numbers.formatDecimal(rekening.saldo,1,'COMMA', 2,'POINT')}"></td>
+         <td style="text-align: center">
+            <a th:href="@{/bedrijfsgegevens(rekeningId=${rekening.rekeningId})}">Bekijken</a>
+        </td>
+    </tr>
+    </table>
+    <button class="button" name="terug" value="terug" type="button" onclick="history.back()">Terug</button>
+</form>
+</div>
+</body>
+</html>

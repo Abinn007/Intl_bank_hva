@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/openenRekening.css}">
+    <title>Particulier Rekening Openen</title>
+</head>
+<body th:object="${klant}">
+    <h1> International Bank of HvA </h1>
+    <h2> Een particuliere rekening openen voor: </h2>
+    <h3> <span th:text="${klant.voornaam} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}"></span></h3>
+    <h3> De volgende gegevens zullen aan uw rekening gekoppeld worden: </h3>
+    <form th:action="@{openen_rekening_particulier}" method="get">
+        <table>
+            <tr>
+                <td>Naam:
+                <label><span th:text="${klant.voorletters} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <td>BSN:
+                <label><span th:text="${klant.bsn}"></span></label>
+                </td>
+            </tr>
+        </table><br><br>
+        <div class="button_position">
+            <button class="button" style="background-color: #28a745"
+                    name="submit" type="submit">AANVRAAG STUREN</button>
+            <button class="button" style="background-color: orange"
+                    name="terug" value="goToWelcome" type="button" onclick="history.back()">TERUG</button>
+            <button class="button" style="background-color: tomato"
+                    name="submit" formaction="/home" value="returnHome" type="submit">UITLOGGEN</button>
+        </div>
+    </form>
+</body>
+</html>

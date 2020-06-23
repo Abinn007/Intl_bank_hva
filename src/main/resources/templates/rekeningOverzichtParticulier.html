@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rekening Overzicht Particulier</title>
+    <!--<link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/rekeningOverzicht.css}">-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenLayout.css}">
+</head>
+<body>
+<br>
+<h1>International Bank of HvA</h1>
+
+
+<form th:action="@{rekeningOverzichtParticulier}" method="get" th:object="${listParticulierRekeningen}">
+    <h2>Overzicht particuliere rekeningen</h2>
+    <div class="table">
+    <table>
+            <tr>
+                <th>Rekeningnummer</th><th>Ten name van</th><th>Saldo</th><th></th>
+            </tr>
+            <tr th:each="particulierRekening: ${listParticulierRekeningen}">
+
+                <td th:text="${particulierRekening.rekeningnummer}"></td>
+                <td><span th:text="${voornaam}"></span> <span th:text="${tussenvoegsel}"></span> <span th:text="${achternaam}"></span></td>
+                <td th:text="${particulierRekening.saldo}"></td>
+                <td>
+                    <a th:href="@{/beheerRekening(rekeningNr=${particulierRekening.rekeningnummer})}">Beheer Rekening</a>
+                </td>
+
+            </tr>
+
+    </table>
+    </div>
+</form>
+
+</body>
+</html>
+
+
+

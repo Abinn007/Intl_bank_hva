@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/openenRekening.css}">
+    <title>Zakelijk Rekening Openen</title>
+</head>
+<body>
+    <h1> International Bank of HvA </h1>
+    <h2> Een zakelijk rekening openen voor: </h2>
+    <h3> <span th:text="${klant.getVoornaam()} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}"></span></h3>
+    <h3> Vul de gegevens over uw bedrijf in: </h3>
+    <form th:action="@{opslaan_rekening_zakelijk}" method="post" th:object="${rekening}">
+        <table>
+            <tr>
+                <td>Bedrijfsnaam:*
+                <label><input th:field="*{bedrijfsnaam}" pattern="[a-zA-Z ]*" title="Bedrijfsnaam ongeldig" required></label></td>
+            </tr>
+            <tr>
+                <td>KVK Nummer:*
+                <label><input th:field="*{kvkNummer}" maxlength="8" pattern="[a-zA-Z0-9]*" title="KVK Nummer ongeldig" required></label></td>
+            </tr>
+            <tr>
+                <td>BTW Nummer:*
+                <label><input th:field="*{btwNummer}"  required></label></td>
+            </tr>
+            <tr>
+                <td>Sector:*
+                <label><input th:field="*{sector}" pattern="[a-zA-Z ]*" title="Sector ongeldig" required></label></td>
+            </tr>
+        </table><br><br>
+        <div class="button_position">
+            <button class="button" style="background-color: #28a745"
+                    name="submit" type="submit">AANVRAAG STUREN</button>
+            <button class="button" style="background-color: orange"
+                    name="terug" value="goToWelcome" type="button" onclick="history.back()">TERUG</button>
+        </div>
+    </form>
+</body>
+</html>

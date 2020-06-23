@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nieuwe klant</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/wordenKlantError.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabel.css}">
+
+</head>
+<body>
+<h1>International Bank of HvA</h1>
+<form>
+<h2>Foutmelding!</h2><br>
+<h3>Sorry!</h3>
+
+    <div class="alert">
+        <span style="font-size: 20px;" th:text="${error}"></span>
+    </div>
+        <div class="button_position">
+        <button class="button" name="terug" value="klant worden" type="button" onclick="history.back()">Terug</button>
+    </div>
+
+</form>
+</body>
+</html>

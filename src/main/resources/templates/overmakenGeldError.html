@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Geld overmaken niet gelukt!</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/overmakenGeld.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+</head>
+<body>
+<br>
+
+<h1>Sorry, het overmaken is niet gelukt!</h1><br>
+<h3>Controleer uw saldo en het ingevulde rekeningnummer en probeer het opnieuw.</h3>
+
+<div class="button_position">
+    <button class="button" style="background-color: orange" name="terug" value="geldOvermaken" type="button"
+            onclick="history.back()">Terug</button>
+
+    <button class="button" style="background-color: tomato"
+            name="uitloggen" formaction="/home" value="logout"
+            type="button">Uitloggen</button>
+</div>
+</body>
+</html>

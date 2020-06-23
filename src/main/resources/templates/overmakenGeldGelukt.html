@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Overmaken gelukt</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/overmakenGeld.css}">
+</head>
+<body>
+<h1> Overmaken gelukt!</h1>
+
+<div class="button_position">
+    <button class="button" style="background-color: #28a745"
+            name="terug" value="goToWelcome" type="button"
+            onclick="history.back()">Nog eens geld overmaken</button>
+
+    <button class="button" style="background-color: tomato"
+            name="uitloggen" formaction="/home" value="logout"
+            type="submit">Uitloggen</button>
+</div>
+</body>
+</html>

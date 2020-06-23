@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rekeninghouder Toevoegen</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/rekeninghouderToevoegen.css}">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">-->
+</head>
+<body>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+  font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form style=" position: initial; margin-right: 15px; padding-top: 5px;" class="btn btn-login float-right" th:action="@{/logout}"
+              method="get">
+            <button type="submit" class="btn btn-login">Loguit</button>
+        </form>
+    </div>
+</nav>
+<form class="form" th:action="@{/rekeninghouderToevoegen(rekeningNr=${rekeningnummer})}" method="post">
+    <h2>Rekeninghouder Toevoegen</h2>
+    <p  type="Gebruikersnaam:"><input id="gebruikersnaam" type="text" name="rekeninghouderGebruikersnaam" placeholder="Schrijft gebruikersnaam van rekeninghouder... "></input></p>
+    <p  type="Veiligcode:"><input id="code" type="password" name="veiligCode" placeholder="Scrijft een code van 5 cijfers..." maxlength="5" pattern="[0-9]{0,9}"></input></p>
+    <button id="error"  type="submit" >  SUBMIT  </button>
+    <button  formaction="/listParticulierRekeningen" type="button" onclick="history.back()" >TERUG</button>
+    <div id="message" style="margin: 90px 25px 0px 25px; width: 85%; text-align: center;">
+        <span style="color: red; font-size: 15px;" th:utext="${message}"></span>
+    </div>
+    <div id="melding" style="margin: 25px 25px 0px 25px; width: 85%; text-align: center; visibility: hidden" >
+        <span style="color: #0069c0; font-size: 17px;"><i class="fa fa-exclamation-circle" style="color: red;" aria-hidden="true"></i>Je moet Gebruikersnaam en Veiligcode invoeren! </span>
+    </div>
+</form>
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        $("#error").on("click", function () {
+            var gebrukersnaam = document.getElementById("gebruikersnaam").value;
+            var veiligCode = document.getElementById("code").value;
+
+            if (gebrukersnaam == "" || veiligCode == "") {
+                document.getElementById("melding").style.visibility = "visible";
+                return false;
+            } else {
+                return true;
+            }
+        });
+    })
+</script>
+</html>

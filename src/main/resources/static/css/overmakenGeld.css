@@ -1,0 +1,43 @@
+label{
+    display: inline-block;
+    width: 180px;
+    margin: 5px;
+    text-align: left;
+    color: aliceblue;
+}
+
+input{
+    background-color: #f1f1f1;
+    border:none;
+    width: 180px;
+    margin: 0.3px;
+}
+
+.button {
+    border: none;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    margin: 30px 25px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.button_position{
+    position: relative;
+
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}

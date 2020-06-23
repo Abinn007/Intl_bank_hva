@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Beheer Rekening Zakelijk</title>
+    <!--<link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenLayout.css}">
+</head>
+<body>
+<br>
+<h1>International Bank of HvA</h1>
+<form th:action="@{beheerRekeningZakelijk}" method="get">
+    <div class="table">
+    <table>
+        <tr>
+            <td>IBAN <span th:text="${rekeningnummer}"></span></td>
+            <td>t.n.v. <span th:text="${bedrijfsnaam}"></span></span></td>
+        </tr>
+    </table>
+    </div>
+    <br><br>
+    <button class="button" style="background-color: #28a745"><a th:href="@{/inzienTransactiesEnSaldo(rekeningNr=${rekeningnummer})}">TRANSACTIEOVERZICHT</a></button>
+    <button class="button" style="background-color: #28a745" name="submit" formaction="/OvermakenGeld" value="overmakenGeld" type="submit">GELD OVERMAKEN</button>
+    <br>
+    <button class="button" style="background-color: #28a745"><a th:href="@{/rekeninghouder(rekeningNr=${rekeningnummer})}">REKENINGHOUDER TOEVOEGEN</a></button>
+    <button class="button" style="background-color: #28a745" name="submit" formaction="/welkom" value="goToWelcome" type="submit">NAAR OVERZICHT</button>
+</form>
+</body>
+</html>

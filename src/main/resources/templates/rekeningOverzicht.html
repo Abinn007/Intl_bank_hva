@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rekening Overzicht</title>
+    <!--<link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/welkom.css}">-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenLayout.css}">
+
+</head>
+
+
+<body>
+<br>
+<h1>International Bank of HvA</h1>
+
+    <form th:object="${klant}">
+    <br>
+        <h2>Rekening Overzicht</h2>
+        <div class="table">
+            <table>
+                <tr>
+                    <!--<button name="submit" formaction="rekeningOverzichtParticulier" value="rekeningOverzichtParticulier"
+                            type="submit" id="error">Particuliere rekeningen</button>-->
+                    <td><a href="rekeningOverzichtParticulier">Particuliere rekeningen</a></td>
+                </tr>
+                <tr>
+                    <td><a href="rekeningOverzichtZakelijk">Zakelijke rekeningen</a></td>
+                </tr>
+            </table>
+        </div>
+
+<br><br>
+         <!--<div id="melding" style="margin: 12px; width: 90%; text-align: center; visibility: hidden" >
+            <span style="color: #0069c0; font-size: 17px;"><i class="fa fa-exclamation-circle" style="color: red;" aria-hidden="true"></i>Er zijn geen rekeningen gevonden. </span>
+        </div>-->
+
+<div class="button_position">
+    <button class="button" name="submit" style="background-color: #28a745" formaction="/openRekening" value="openenRekening" type="submit">REKENING OPENEN</button>
+    <button class="button" name="submit" style="background-color: #28a745" formaction="/koppelNieuweRekeningActiveren" value="koppelNieuweRekeningActiveren" type="submit">REKENING KOPPELEN</button>
+    <br>
+    <button class="button" name="submit" style="background-color: orange" formaction="/welkom" value="goToWelcome" type="submit">NAAR OVERZICHT</button>
+    <button class="button" name="submit" style="background-color: tomato" formaction="/home" value="logout" type="submit">UITLOGGEN</button>
+</div>
+</form>
+
+</body>
+<!--<script type="text/javascript">
+    $(function () {
+        $("#error").on("click", function () {
+
+
+            if (userName == "" || password == "") {
+                document.getElementById("melding").style.visibility = "visible";
+                return false;
+            } else {
+                return true;
+            }
+        });
+    })
+</script>-->
+</html>

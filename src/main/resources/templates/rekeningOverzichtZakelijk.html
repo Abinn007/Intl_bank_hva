@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rekening Overzicht Zakelijk</title>
+    <!--<link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenLayout.css}">
+
+</head>
+
+<body>
+<br>
+<h1>International Bank of HvA</h1>
+
+
+<form th:action="@{rekeningOverzichtZakelijk}" method="get" th:object="${listZakelijkRekeningen}">
+    <h2>Overzicht zakelijke rekeningen</h2>
+    <div class="table">
+    <table>
+        <tr>
+            <th>Rekeningnummer</th><th>Ten name van</th><th>Saldo</th><th></th>
+        </tr>
+        <tr th:each="zakelijkRekening: ${listZakelijkRekeningen}">
+
+            <td th:text="${zakelijkRekening.rekeningnummer}"></td>
+            <td th:text="${zakelijkRekening.bedrijfsnaam}"></td>
+            <td th:text="${zakelijkRekening.saldo}"></td>
+            <td>
+                <a th:href="@{/beheerRekeningZakelijk(rekeningNr=${zakelijkRekening.rekeningnummer})}">Beheer Rekening</a>
+            </td>
+
+        </tr>
+
+    </table>
+    </div>
+</form>
+
+</body>
+</html>
