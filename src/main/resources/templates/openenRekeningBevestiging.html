@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" th:href="@{css/openenRekening.css}">
     <title>Rekening Openen Bevestiging</title>
 </head>
 <body>
-    <h1> International Bank of HvA </h1>
-    <h2> Bevestiging van een nieuwe rekening voor: </h2>
-    <h3> <span th:text="${klant.getVoornaam()} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}"></span></h3>
-    <h3> Het openen van uw rekening is gelukt. </h3>
-    <h3> Uw rekening nummer is: </h3>
-    <form>
-        <table>
-            <tr>
-                <td>IBAN:
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+  font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form style=" position: initial; margin-right: 15px; padding-top: 3px;" class="btn btn-login float-right" th:action="@{/logout}"
+              method="get">
+            <button type="submit" class="btn btn-login">Loguit</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+
+    "><h1 style="font-weight: bold; font-size: 30px;">International Bank of HvA</h1></div>
+</nav>
+<form class="form" style="width: 700px;">
+    <h2> Bevestiging van uw nieuwe rekening </h2>
+    <p style="color: #3e64ff; font-weight: bold"> <span th:text="${klant.voornaam} + ' ' + ${klant.achternaam}"></span></p>
+    <p> Het openen van uw rekening is gelukt. </p>
+    <p> Uw rekening nummer is: </p>
+    <table class="display">
+        <tr>
+            <td>IBAN:
                 <label><span th:text="${rekeningnummer}"></span></label>
-                </td>
-            </tr>
-        </table><br><br>
-        <div class="button_position">
-            <button class="button" style="background-color: orange"
-                    name="submit" formaction="/welkom" value="goToWelcome" type="submit">NAAR OVERZICHT</button>
-            <button class="button" style="background-color: tomato"
-                    name="submit" formaction="/home" value="returnHome" type="submit">UITLOGGEN</button>
-        </div>
-    </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Saldo: €
+                <label><span th:text="${#numbers.formatDecimal(saldo, 1, 'COMMA', 2, 'POINT')}"></span></label>
+            </td>
+        </tr>
+    </table><br>
+    <button class="button" name="submit" style="background-color: #3e64ff" formaction="/welkom" value="goToWelcome" type="submit">Naar Overzicht</button>
+</form>
 </body>
 </html>

@@ -4,21 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoofd zakelijk</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" th:href="@{css/hoofdZakelijk.css}">
 </head>
 <body>
-<h1>International Bank of HvA</h1>
-<form>
-<h2>Afdeling: Zakelijk Rekening</h2>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+            font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form class="btn btn-login float-right form-loguit" th:action="@{/logoutMdw}" method="post">
+            <button type="submit" class="btn btn-login btn-loguit">Loguit</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+    "><h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
+<form class="form">
+<h2>Afdeling: Zakelijk Rekening</h2><br><br>
     <div style="text-align: center">
-    <button formaction="/bedrijven_met_hoogste_saldo" class="button" style="background-color: #47a7ff"
+    <button formaction="/bedrijven_met_hoogste_saldo" class="button"
             name="terug" value="terug" type="submit">Lijst van 10 bedrijven met hoogste saldo</button>
-    <button formaction="/gemiddelde_saldo_per_sector" class="button" style="background-color: #28a745"
+    <button formaction="/gemiddelde_saldo_per_sector" class="button"
             name="terug" value="terug" type="submit">Lijst van gemiddelde saldo per sector</button>
-    <button formaction="/meest_actieve_bedrijven" class="button" style="background-color: #3e64ff"
+    <button formaction="/meest_actieve_bedrijven" class="button"
             name="terug" value="terug" type="submit">Lijst van 10 meest actieve bedrijven</button>
-    <button class="button button_position" name="terug" value="terug" type="button" onclick="history.back()">
-            Uitloggen</button>
+
     </div>
 </form>
 </body>

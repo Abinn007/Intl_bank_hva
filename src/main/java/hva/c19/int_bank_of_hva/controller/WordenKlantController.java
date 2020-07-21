@@ -4,7 +4,6 @@ import hva.c19.int_bank_of_hva.service.KlantService;
 import hva.c19.int_bank_of_hva.utilities.KlantBackingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -13,9 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @SessionAttributes("gebruikersnaam")
 public class WordenKlantController {
-    private final static String BSN_ERROR = "De door u ingevoerde BSN bestaat al!";
-    private final static String EMAILADRES_ERROR = "De door u ingevoerde emailadres is al in gebruik!";
-    private final static String GEBRUIKERSNAAM_ERROR = "De door u gekozen gebruikersnaam is al in gebruik!";
+    private final static String BSN_ERROR = "De door u ingevoerde BSN bestaat al !";
+    private final static String EMAILADRES_ERROR = "Het door u ingevoerde emailadres is al in gebruik !";
+    private final static String GEBRUIKERSNAAM_ERROR = "De door u gekozen gebruikersnaam is al in gebruik !";
 
     @Autowired
     private final KlantService klantService;
@@ -32,20 +31,6 @@ public class WordenKlantController {
     }
 
     /**
-     * Om een nieuwe klant te worden
-     *
-     * @return wordenKlant.html
-     */
-    @GetMapping("/nieuwe_klant")
-    public ModelAndView handelNieuwKlant() {
-        ModelAndView mav = new ModelAndView("wordenKlant");
-        KlantBackingBean klantBackingBean = new KlantBackingBean();
-        mav.addObject("klantBean", klantBackingBean);
-        return mav;
-    }
-
-
-    /**
      * Om een klant te registreren en opslaan in de database.
      * Checkt eerst als bsn,emailadres en gebruikersnaam zijn unique.
      *
@@ -56,56 +41,31 @@ public class WordenKlantController {
     public ModelAndView handelRegistrerenKlant(@ModelAttribute KlantBackingBean klantBackingBean) {
         ModelAndView mav;
         if (klantService.isBestaandeBsn(klantBackingBean.getBsn())) {
-            mav = bsnErrorModelAndView(klantBackingBean);
+            mav = getErrorMAV(klantBackingBean, BSN_ERROR);
         } else if (klantService.isBestaandeEmailadres(klantBackingBean.getEmailadres())) {
-            mav = EmailadresErrorModelAndView(klantBackingBean);
+            mav = getErrorMAV(klantBackingBean, EMAILADRES_ERROR);
         } else if (klantService.isBestaandeGebruikersnaam(klantBackingBean.getGebruikersnaam())) {
-            mav = gebruikersnaamErrorModelAndView(klantBackingBean);
+            mav = getErrorMAV(klantBackingBean, GEBRUIKERSNAAM_ERROR);
         } else {
             klantService.saveKlant(klantBackingBean.klant());
-            mav = klantRegistrerenModelAndView(klantBackingBean);
+            mav = klantRegistrerenMAV(klantBackingBean);
         }
         return mav;
     }
 
     /**
-     * Om een melding pagina te gaan als de ingevoerde BSN al is gebruik is.
+     * Om een melding te laten zien als de ingevoerde BSN,
+     * emailadres of gebruikersnaam al in gebruik zijn.
      *
      * @param klantBackingBean backingbean nieuwe klant
-     * @return wordenKlantError.html
+     * @param error error bericht
+     * @return errorMAV
      */
-    private ModelAndView bsnErrorModelAndView(@ModelAttribute KlantBackingBean klantBackingBean) {
+    private ModelAndView getErrorMAV(@ModelAttribute KlantBackingBean klantBackingBean, String error) {
         ModelAndView mav;
-        mav = new ModelAndView("wordenKlantError");
-        mav.addObject("error", BSN_ERROR);
-        mav.addObject("gebruikersnaam", klantBackingBean.getGebruikersnaam());
-        return mav;
-    }
-
-    /**
-     * Om een melding pagina te gaan als de ingevoerde emailadres al in gebruik is.
-     *
-     * @param klantBackingBean backingbean nieuwe klant
-     * @return wordenKlantError.html
-     */
-    private ModelAndView EmailadresErrorModelAndView(@ModelAttribute KlantBackingBean klantBackingBean) {
-        ModelAndView mav;
-        mav = new ModelAndView("wordenKlantError");
-        mav.addObject("error", EMAILADRES_ERROR);
-        mav.addObject("gebruikersnaam", klantBackingBean.getGebruikersnaam());
-        return mav;
-    }
-
-    /**
-     * Om een melding pagina te gaan als de gekozen gebruikersnaam al in gebruik is.
-     *
-     * @param klantBackingBean backingbean nieuwe klant
-     * @return wordenKlantError.html
-     */
-    private ModelAndView gebruikersnaamErrorModelAndView(@ModelAttribute KlantBackingBean klantBackingBean) {
-        ModelAndView mav;
-        mav = new ModelAndView("wordenKlantError");
-        mav.addObject("error", GEBRUIKERSNAAM_ERROR);
+        mav = new ModelAndView("wordenKlant");
+        mav.addObject("klantBean", klantBackingBean);
+        mav.addObject("error", error);
         mav.addObject("gebruikersnaam", klantBackingBean.getGebruikersnaam());
         return mav;
     }
@@ -116,7 +76,7 @@ public class WordenKlantController {
      * @param klantBackingBean backingbean nieuwe klant
      * @return wordenKlantRegistreren.html
      */
-    private ModelAndView klantRegistrerenModelAndView(@ModelAttribute KlantBackingBean klantBackingBean) {
+    private ModelAndView klantRegistrerenMAV(@ModelAttribute KlantBackingBean klantBackingBean) {
         ModelAndView mav;
         mav = new ModelAndView("wordenKlantRegistreren");
         mav.addObject("klant", klantBackingBean);

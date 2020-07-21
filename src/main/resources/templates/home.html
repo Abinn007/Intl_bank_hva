@@ -3,20 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/ded002a609.js"></script>
  <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
 </head>
 
 <body>
 <header class="header">
-    <h2 class="logo">Int Bank of HvA</h2>
+<!--    <h2 class="logo">Int Bank of HvA</h2>-->
+    <img style="width: 140px; height: 70px; margin-left: 20px;" src="image/5.png">
     <ul class="main-nav">
-        <li><a href="/mlogin">Medewerker</a></li>
-        <li><a href="/plogin">Klant</a></li>
-        <li><a href="/nieuwe_klant">Nieuwe Klant</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="/mdwrlogin">Medewerker</a></li>
+        <li><a href="/klntlogin">Klant</a></li>
+        <li><a href="/nieuweKlant">Nieuwe Klant</a></li>
     </ul>
 </header>
-<h1 style="text-align: center; margin-top: 300px; color: white">International Bank of HvA</h1>
+<h1 style="text-align: center; margin-top: 170px; color: white; font-weight: bold">International Bank of HvA</h1>
+<!-- Site footer -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h4>Over Ons</h4>
+                <p class="text-justify">Wij willen positieve veranderingen realiseren door onze expertise, middelen en maatschappelijke positie op de juiste manier in te zetten.</p>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <h4>Categorieën</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Zakelijk</a></li>
+                    <li><a href="#">Particulier</a></li>
+                    <li><a href="#">Service</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <h4>Nuttige Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Over Ons</a></li>
+                    <li><a href="#">Contact Ons</a></li>
+                    <li><a href="#">Veilig Bankieren</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="margin-top: 0; margin-bottom: 5px;">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2020 by
+                    <a href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_nav-header-signin">emr47Ny</a>.
+                </p>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
+
 </html>

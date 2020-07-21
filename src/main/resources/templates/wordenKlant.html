@@ -6,17 +6,27 @@
     <title>Nieuwe klant</title>
     <link rel="stylesheet" type="text/css" th:href="@{css/wordenKlant.css}">
     <script type="application/javascript" th:src="@{js/wordenKlant.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
-
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+  font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -65px;">
+     <h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
 <form th:action="@{registreren_klant}" method="post" th:object="${klantBean}">
-    <h1> International Bank of HvA</h1>
-    <h2> Nieuwe klant formulier </h2>
-    <h3> Vul uw gegevens in </h3>
+    <h2>Nieuwe klant formulier </h2>
+    <h3>Vul uw gegevens in </h3>
     <p>Persoonlijke gegevens</p>
     <div style="text-align: left" id="radio">
         <label><input name="radiobutton" type="radio" value="De heer" th:field="*{aanhef}">De heer</label>
         <label> <input name="radiobutton" type="radio" value="Mevrouw" th:field="*{aanhef}">Mevrouw</label>
+        <span class="alert" style="font-size: 18px;" th:text="${error}"></span>
     </div>
 
     <div class="grid-container2">
@@ -24,21 +34,20 @@
             <input class="uppercase input2" name="voorletters" th:field="*{voorletters}" pattern="[a-zA-Z. ]*"
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required/> </label>
 
-        <label>Achternaam:*
-            <input class="capitalize input2" name="achternaam" th:field="*{achternaam}" pattern="[a-zA-Z ]*"
+        <label> Voornaam:*
+            <input class="capitalize input2" name="voornaam" th:field="*{voornaam}" pattern="[a-zA-Z ]*"
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
     </div>
 
     <div class="grid-container2 ">
-        <label> Voornaam:*
-            <input class="capitalize input2" name="voornaam" th:field="*{voornaam}" pattern="[a-zA-Z ]*"
-                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
-
         <label>Tussenvoegsel:
             <input class="input2" name="tussenvoegsel" th:field="*{tussenvoegsel}" pattern="[a-zA-Z ]*"
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')"> </label>
-    </div>
 
+        <label>Achternaam:*
+            <input class="capitalize input2" name="achternaam" th:field="*{achternaam}" pattern="[a-zA-Z ]*"
+                   oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
+    </div>
     <div class="grid-container2">
         <label>BSN:*
             <input class="input2" name="bsn" th:field="*{bsn}" placeholder="123456789" maxlength="9"
@@ -46,10 +55,9 @@
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
 
         <label>Geboortedatum:*
-            <input style="color: dimgray" class=" input2" name="geboortedatum" type="date" th:field="*{geboortedatum}"
-                   required></label>
+            <input style="color: dimgray" class=" input2" name="geboortedatum" type="date" id="geboortedatum"
+                   onkeyup="dobValidate()" oninput="setCustomValidity('')" th:field="*{geboortedatum}" required></label>
     </div>
-
     <div class="grid-container2">
         <label>Emailadres:*
             <input class="input2" type="email" name="emailadres" th:field="*{emailadres}" placeholder="test@example.com"
@@ -58,11 +66,11 @@
         <label>Gebruikersnaam:*
             <input class="input2" th:field="*{gebruikersnaam}" required> </label>
     </div>
-
     <div class="grid-container2">
         <label>Wachtwoord:*
             <input class="input2" id="password" name="password" type="password" required th:field="*{wachtwoord}"
-                   placeholder="min 8 tekens,1hoofd-,1kleinletter & 1cijfer" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,}"
+                   placeholder="min 8 tekens,1hoofd,1klein & 1cijfer/sp.char"
+                   pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                    oninvalid="valid_password(this)" oninput="setCustomValidity('')"></label>
         <label>Bevestig&nbsp;wachtwoord:*
             <input class="input2" id="confirm_password" name="confirm_password" type="password"
@@ -73,10 +81,10 @@
     <p>Adresgegevens</p>
     <div class="grid-container3">
         <label>Postcode:*
-            <input class="uppercase input3" name="postcode" th:field="*{postcode}" maxlength="6"
-                   pattern="[0-9]{4}[A-Za-z]{2}"
+            <input class="uppercase input3" name="postcode" id="postcode" th:field="*{postcode}" maxlength="7"
+                   pattern="[0-9]{4}[A-Za-z- ]*"
                    oninvalid="valid_postcode(this)" oninput="this.setCustomValidity('')"
-                   placeholder="1111AB" required></label>
+                   placeholder="1111AB  of  1111 AB" required></label>
 
         <label>Huisnummer:*
             <input class="input3" name="huisnummer" th:field="*{huisnummer}" pattern="[0-9]{1,}"
@@ -98,15 +106,21 @@
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
     </div>
     <br>
-
     <div class="button_position">
-        <button class="button" style=" background-color: #28a745;" name="submit" value="registreren"
+        <button class="button" name="submit" value="registreren"
                 type="submit">Registreren
         </button>
-        <button class="button" style="background-color: tomato;" name="terug" value="home" type="button"
+        <button class="button" name="terug" value="home" type="button"
                 onclick="history.back()">Annuleren
         </button>
     </div>
 </form>
 </body>
+<script>
+    // om automatisch een spatie toe te voegen in de postcode,
+    // als de klant zonder spatie de postcode invoert.
+    document.getElementById('postcode').addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/[^\dA-Za-z]/g, '').replace(/(.{4})/g, '$1 ').trim();
+    });
+</script>
 </html>

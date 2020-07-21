@@ -5,33 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bedrijven Lijst met hoogste saldo</title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabel.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabelVoorLijsten.css}">
 </head>
 <body>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+  font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form class="btn btn-login float-right form-loguit">
+            <button type="button" class="btn btn-login btn-loguit" onclick="history.back()">Terug</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+    "><h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
 <div align="center">
-    <h1>International Bank of HvA</h1><br>
-    <form th:action="@{/bedrijfsgegevens}" method="get" th:object="${rekening}">
+    <form th:object="${rekening}">
         <table>
             <tr>
-                <th colspan="4" style="background-color:darkgrey; color:white; padding:1px; font-size:20px">
+                <th colspan="4" style="background-color: #e6e6e6; color: #3e64ff; padding:1px; font-size:20px">
                     <p>Bedrijfsgegevens</p>
                 </th>
             </tr>
-            <tr style="background-color:#32A9EE;color:white;font-size: 17px">
+            <tr style="background-color: darkgrey; color:black;font-size: 17px; text-align: center">
                 <th>Bedrijfsnaam</th>
                 <th>KvKnummer</th>
                 <th>BTWnummer</th>
                 <th>Sector</th>
             </tr>
             <tr>
-                <td style="text-align: center" th:text="${rekening.bedrijfsnaam}"></td>
+                <td style="text-align: center">
+                    <a th:href="@{/klantgegevens(rekeningId=${rekening.rekeningId})}"
+                       th:text="${rekening.bedrijfsnaam}"></a></td>
                 <td style="text-align: center" th:text="${rekening.kvkNummer}"></td>
                 <td style="text-align: center" th:text="${rekening.btwNummer}"></td>
                 <td style="text-align: center" th:text="${rekening.sector}"></td>
             </tr>
         </table>
-        <button class="button" name="terug" value="terug" type="button" onclick="history.back()">Terug</button>
     </form>
 </div>
 </body>

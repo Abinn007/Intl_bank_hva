@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("gebruikersnaam")
 public class  OpenenRekeningController {
+
     @Autowired
     private final KlantService klantService;
 

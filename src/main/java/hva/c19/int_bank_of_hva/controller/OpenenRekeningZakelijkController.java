@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @SessionAttributes("gebruikersnaam")
 public class OpenenRekeningZakelijkController {
-    private static final double BEGIN_SALDO = 0.0;
+    private static final double BEGIN_SALDO = 25.00;
     private static final String CONSTANT_DEEL_REKENINGNUMMER = "NL35IBVH";
     private static final String CIJFER_DEEL_REKENINGNUMMER = "2000000000";
     private static final int CIJFER_DEEL_SUBSTRING = 8;
@@ -72,10 +72,13 @@ public class OpenenRekeningZakelijkController {
         String rekeningnummer = nieuweRekeningnummer();
         Rekening zakelijkRekening = new ZakelijkRekening(rekeningnummer, BEGIN_SALDO, bedrijfsnaam, kvkNummer, btwNummer, sector);
         mav.addObject("rekeningnummer", zakelijkRekening.getRekeningnummer());
+        mav.addObject("saldo", zakelijkRekening.getSaldo());
         zakelijkRekening.klantToevoegen(klant);
         rekeningService.saveRekening(zakelijkRekening);
         return mav;
     }
+
+
 
     /**
      * Om attributes toe te voegen in ModelAndView.

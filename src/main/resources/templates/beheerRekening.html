@@ -3,31 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Beheer Rekening Particulier</title>
-    <!--<link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/overmakenGeld.css}">-->
-    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenLayout.css}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/beheerRekening.css}">
 
 </head>
     <body>
-    <br>
-    <h1>International Bank of HvA</h1>
-        <form th:action="@{beheerRekening}" method="get">
-            <h2>Beheer rekening</h2>
-            <div class="table">
-                <h3><table>
-                    <tr>
-                        <td>IBAN <span th:text="${rekeningnummer}"></span></td>
-                        <td>t.n.v. <span th:text="${voornaam}"></span> <span th:text="${tussenvoegsel}"></span> <span th:text="${achternaam}"></span></span></td>
-                    </tr>
-                </table></h3>
-            </div>
-<div class="button_position">
-    <button class="button" style="background-color: #28a745"><a th:href="@{/inzienTransactiesEnSaldo(rekeningNr=${rekeningnummer})}">TRANSACTIEOVERZICHT</a></button>
-    <button class="button" style="background-color: #28a745"><a th:href="@{/overmakenGeld(rekeningNr=${rekeningnummer})}">GELD OVERMAKEN</a></button>
-    <br>
+    <nav class="home">
+        <div class="icon">
+            <a href="/home"><i style="width: 36px;
+            font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+            <form class="btn btn-login float-right form-loguit" th:action="@{/logout}" method="get">
+                <button type="submit" class="btn btn-login btn-loguit">Loguit</button>
+            </form>
+        </div>
+        <div style="text-align: center; margin-left: 150px;"><h1 style="color:#3e64ff;  text-align: center;
+    margin-top: -45px;
+    font-size: 30px;
+    font-weight: bold;">International Bank of HvA</h1></div>
+        <!--<div style="text-align: center; margin-left: 150px;"><h1>International Bank of HvA</h1></div>-->
+    </nav>
+    <form class="form" th:action="@{beheerRekening}" method="get" th:object="${rekeninghouders}" >
 
-    <button class="button" style="background-color: #28a745"><a th:href="@{/rekeninghouder(rekeningNr=${rekeningnummer})}">REKENINGHOUDER TOEVOEGEN</a></button>
-    <button class="button" style="background-color: orange" name="submit" formaction="/welkom" value="goToWelcome" type="submit">NAAR OVERZICHT</button>
+            <h2>Beheer Rekening</h2>
+            <div class="table">
+                <table>
+                    <div style="font-size: 18px">
+                    <th>IBAN <span th:text="${rekeningnummer}"></span></th>
+                    <tr th:each="klant: ${rekeninghouders}">
+
+                        <td>t.n.v. <span th:text="${klant.voornaam}"></span> <span th:text="${klant.tussenvoegsel}"></span> <span th:text="${klant.achternaam}"></span></span></td>
+                    </tr>
+                    </div>
+                </table>
+            </div>
+
+<div class="button_position">
+    <button class="button" style="background-color: #3e64ff"><a th:href="@{/inzienTransactiesEnSaldo(rekeningNr=${rekeningnummer})}">Transactieoverzicht</a></button>
+    <button class="button" style="background-color: #3e64ff"><a th:href="@{/overmakenGeld(rekeningNr=${rekeningnummer})}">Geld Overmaken</a></button>
+    <button class="button" style="background-color: #3e64ff"><a th:href="@{/rekeninghouder(rekeningNr=${rekeningnummer})}">Rekeninghouder Toevoegen</a></button>
+    <button class="button" style="background-color: #3e64ff" name="submit" formaction="/welkom" value="goToWelcome" type="submit">Naar Overzicht</button>
+    <button class="button2" style="background-color: #3e64ff" name="terug" value="geldOvermaken" type="button" onclick="history.back()">Terug</button>
 </div>
         </form>
     </body>

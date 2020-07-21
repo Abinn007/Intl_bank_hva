@@ -1,19 +1,36 @@
-html,body{
-    margin:0;
+html,body {
+    margin: 0;
     padding: 0;
-    height: 140%;
+    height: 100%;
     background-size: cover;
-    background: linear-gradient(to bottom right, #47a7ff, #0554a1) no-repeat;
+    background-color: #6ec6ff;
+    /*background-image: url("/image/bg3.jpg");*/
     font-family: "Montserrat", sans-serif;
 }
 h1{
     text-align: center;
     color: aliceblue;
 }
+h2{
+    text-align: center;
+    color: aliceblue;
+    background-color:gray;
+    padding: 14px 20px;
+    margin: 10px 2px;
+    margin-bottom: 50px;
+    border-radius: 5px;
+}
+p{
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+}
 .button{
+    background-color: tomato;
     border: none;
     color: white;
-    padding: 10px 30px;
+    padding: 10px 24px;
     text-align:center;
     text-decoration: none;
     display: inline-block;
@@ -35,13 +52,9 @@ h1{
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     font-family: "Montserrat", sans-serif;
 }
-.button_position {
+.button_position{
     text-align: center;
-    margin-top: 50px;
-}
-.alert{
-    text-align: center;
-    color: black;
+    margin-top: 25px;
 }
 form {
     width: 600px;
@@ -57,24 +70,32 @@ form {
     font-size: 14px;
     position: relative;
     margin-top: 50px;
+}
 
+
+.button{
+    background-color: orange;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align:center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 20px 10px;
+    cursor: pointer;
+    opacity: 0.9;
+    margin-top: 25px;
 }
-h2{
-    text-align: center;
-    color: aliceblue;
-    background-color:gray;
-    padding: 14px 20px;
-    margin: 10px 2px;
-    border-radius: 5px;
+.button:hover{
+    opacity: 1;
 }
-h3{
-    text-align: center;
-    color: orange;
+.title {
+    background-color: darkgrey;
+    color: white;
+    padding: 5px;
     font-size: 20px;
+    width: 39%;
+    text-align:center;
 }
-p{
-    text-align: center;
-    color: black;
-    font-size: 20px;
-    font-family: "Montserrat", sans-serif;
-}
+

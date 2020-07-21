@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update klant</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/wordenKlantRegistreren.css}">
+
+</head>
+<body>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px; font-size: 60px;
+              color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form style=" position: initial; margin-right: 15px; padding-top: 3px;" class="btn btn-login float-right" th:action="@{/logout}"
+              method="post">
+            <button type="submit" class="btn btn-login btn-loguit">Loguit</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+    "><h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
+<form class="form" th:object="${klant}">
+    <h2>Bevestiging van wijzijging</h2><br><br>
+    <P><span th:text="${klant.getVoornaam()}"> </span> <span
+            th:text="${klant.getTussenvoegsel()}"> </span>
+        <span th:text="${klant.getAchternaam()}"></span>,</P>
+    <p>uw gegevens zijn bijgewerkt.</P><br>
+    <div class="button_position">
+        <button class="button" formaction="welkom" name="submit"
+                value="RekeningOpenen" type="submit">Terug naar Menu</button>
+    </div>
+</form>
+</body>
+</html>

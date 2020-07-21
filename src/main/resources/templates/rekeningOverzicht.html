@@ -2,48 +2,88 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <title>Rekening Overzicht</title>
-    <!--<link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/welkom.css}">-->
-    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenLayout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/rekeningOverzicht.css}">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{css/rekeningOverzichtError.css}">-->
 
 </head>
 
 
 <body>
-<br>
-<h1>International Bank of HvA</h1>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+  font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form style=" position: initial; margin-right: 15px; padding-top: 5px;" class="btn btn-login float-right" th:action="@{/logout}"
+              method="get">
+            <button type="submit" class="btn btn-login">Loguit</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+    "><h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
 
-    <form th:object="${klant}">
-    <br>
-        <h2>Rekening Overzicht</h2>
-        <div class="table">
-            <table>
-                <tr>
-                    <!--<button name="submit" formaction="rekeningOverzichtParticulier" value="rekeningOverzichtParticulier"
-                            type="submit" id="error">Particuliere rekeningen</button>-->
-                    <td><a href="rekeningOverzichtParticulier">Particuliere rekeningen</a></td>
-                </tr>
-                <tr>
-                    <td><a href="rekeningOverzichtZakelijk">Zakelijke rekeningen</a></td>
-                </tr>
-            </table>
-        </div>
 
-<br><br>
-         <!--<div id="melding" style="margin: 12px; width: 90%; text-align: center; visibility: hidden" >
-            <span style="color: #0069c0; font-size: 17px;"><i class="fa fa-exclamation-circle" style="color: red;" aria-hidden="true"></i>Er zijn geen rekeningen gevonden. </span>
-        </div>-->
 
+        <form class="form" th:action="@{rekeningOverzicht}" method="get" th:object="${listParticulierRekeningen}">
+            <h2>Overzicht particuliere rekeningen</h2>
+            <div class="table">
+                <table>
+                    <tr>
+                        <div style="font-size: 18px">
+
+
+
+                        <th>Rekeningnummer</th><th>Ten name van</th><th>Saldo</th>
+                    </div>
+                    </tr>
+                    <div style="font-size: 18px">
+                    <tr th:each="particulierRekening: ${listParticulierRekeningen}">
+
+                        <td><a th:href="@{/beheerRekening(rekeningNr=${particulierRekening.rekeningnummer})}" th:text="${particulierRekening.rekeningnummer}"></a></td>
+                        <td><a th:href="@{/beheerRekening(rekeningNr=${particulierRekening.rekeningnummer})}"> <span th:text="${voornaam}"></span> <span th:text="${tussenvoegsel}"></span> <span th:text="${achternaam}"></span></a></td>
+                        <td><a th:href="@{/beheerRekening(rekeningNr=${particulierRekening.rekeningnummer})}" class="amount" th:text="${#numbers.formatDecimal(particulierRekening.saldo, 1, 'COMMA', 2, 'POINT')}"></a></td>
+
+                    </tr>
+                    </div>
+
+                </table>
+            </div>
+            <br><br>
+            <h2>Overzicht zakelijke rekeningen</h2>
+            <div class="table">
+                <table>
+                    <tr>
+                        <div style="font-size: 18px">
+                        <th>Rekeningnummer</th><th>Ten name van</th><th>Saldo</th>
+                        </div>
+                    </tr>
+                    <div style="font-size: 18px">
+                    <tr th:each="zakelijkRekening: ${listZakelijkRekeningen}">
+                        <td><a th:href="@{/beheerRekeningZakelijk(rekeningNr=${zakelijkRekening.rekeningnummer})}" th:text="${zakelijkRekening.rekeningnummer}"></a></td>
+                        <td><a th:href="@{/beheerRekeningZakelijk(rekeningNr=${zakelijkRekening.rekeningnummer})}" th:text="${zakelijkRekening.bedrijfsnaam}"></a></td>
+                        <td><a th:href="@{/beheerRekeningZakelijk(rekeningNr=${zakelijkRekening.rekeningnummer})}" class="amount" th:text="${#numbers.formatDecimal(zakelijkRekening.saldo, 1, 'COMMA', 2, 'POINT')}"></a></td>
+                    </tr>
+                    </div>
+                </table>
+            </div><br><br>
+
+
+
+        <!--<div id="melding" style="margin: 12px; width: 90%; text-align: center; visibility: hidden" >
+           <span style="color: #0069c0; font-size: 17px;"><i class="fa fa-exclamation-circle" style="color: red;" aria-hidden="true"></i>Er zijn geen rekeningen gevonden. </span>
+       </div>-->
+<!--<form th:object="${klant}">-->
 <div class="button_position">
-    <button class="button" name="submit" style="background-color: #28a745" formaction="/openRekening" value="openenRekening" type="submit">REKENING OPENEN</button>
-    <button class="button" name="submit" style="background-color: #28a745" formaction="/koppelNieuweRekeningActiveren" value="koppelNieuweRekeningActiveren" type="submit">REKENING KOPPELEN</button>
-    <br>
-    <button class="button" name="submit" style="background-color: orange" formaction="/welkom" value="goToWelcome" type="submit">NAAR OVERZICHT</button>
-    <button class="button" name="submit" style="background-color: tomato" formaction="/home" value="logout" type="submit">UITLOGGEN</button>
+    <button class="button" name="submit" style="background-color: #3e64ff" formaction="/openRekening" value="openenRekening" type="submit">Rekening Openen</button>
+    <button class="button" name="submit" style="background-color: #3e64ff" formaction="/welkom" value="goToWelcome" type="submit">Naar Overzicht</button>
+<!--    <button class="button" name="submit" style="background-color: #3e64ff" formaction="/home" value="logout" type="submit">UITLOGGEN</button>-->
 </div>
 </form>
-
 </body>
 <!--<script type="text/javascript">
     $(function () {

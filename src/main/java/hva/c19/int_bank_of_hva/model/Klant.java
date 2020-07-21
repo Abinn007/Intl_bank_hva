@@ -2,6 +2,7 @@ package hva.c19.int_bank_of_hva.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "Klant")
 public class Klant {
@@ -57,6 +58,7 @@ public class Klant {
     public Klant(int klantNr, String aanhef, String voorletters, String voornaam, String tussenvoegsel, String achternaam,
                  String straat, int huisnummer, String toevoeging, String postcode, String woonplaats,
                  int bsn, String geboortedatum, String emailadres, String gebruikersnaam, String wachtwoord) {
+        this.klantNr = klantNr;
         this.aanhef = aanhef;
         this.voorletters = voorletters;
         this.voornaam = voornaam;
@@ -72,7 +74,6 @@ public class Klant {
         this.emailadres = emailadres;
         this.gebruikersnaam = gebruikersnaam;
         this.wachtwoord = wachtwoord;
-        this.klantNr = klantNr;
     }
 
     public Klant(String gebruikersnaam, String wachtwoord) {
@@ -231,9 +232,40 @@ public class Klant {
         isEnabled = enabled;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Klant)) return false;
+        Klant klant = (Klant) o;
+        return getKlantNr() == klant.getKlantNr() &&
+                getHuisnummer() == klant.getHuisnummer() &&
+                getBsn() == klant.getBsn() &&
+                Objects.equals(getAanhef(), klant.getAanhef()) &&
+                getVoorletters().equals(klant.getVoorletters()) &&
+                getVoornaam().equals(klant.getVoornaam()) &&
+                Objects.equals(getTussenvoegsel(), klant.getTussenvoegsel()) &&
+                getAchternaam().equals(klant.getAchternaam()) &&
+                getStraat().equals(klant.getStraat()) &&
+                Objects.equals(getToevoeging(), klant.getToevoeging()) &&
+                getPostcode().equals(klant.getPostcode()) &&
+                getWoonplaats().equals(klant.getWoonplaats()) &&
+                getGeboortedatum().equals(klant.getGeboortedatum()) &&
+                getEmailadres().equals(klant.getEmailadres()) &&
+                getGebruikersnaam().equals(klant.getGebruikersnaam()) &&
+                getWachtwoord().equals(klant.getWachtwoord());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getKlantNr(), getAanhef(), getVoorletters(), getVoornaam(), getTussenvoegsel(),
+                getAchternaam(), getStraat(), getHuisnummer(), getToevoeging(), getPostcode(), getWoonplaats(),
+                getBsn(), getGeboortedatum(), getEmailadres(), getGebruikersnaam(), getWachtwoord());
+    }
+
     public String toString() {
-        return "Voorletters: " + this.voorletters + "\n" + "Achternaam: " + this.achternaam + "\n" + "BSN: " + this.bsn + "\n" + "Adres: " +
-                this.straat + " " + this.huisnummer + " " + this.postcode + " " + this.woonplaats;
+        return "Voorletters: " + this.voorletters + "\n" + "Achternaam: " + this.achternaam + "\n" + "BSN: " +
+                this.bsn + "\n" + "Adres: " + this.straat + " " + this.huisnummer + " " + this.postcode + " " +
+                this.woonplaats;
     }
 
 }

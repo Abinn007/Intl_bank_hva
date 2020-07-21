@@ -14,23 +14,24 @@
     <div class="icon">
         <a href="/home"><i style="width: 36px;
   font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
-        <form style=" position: initial; margin-right: 15px; padding-top: 5px;" class="btn btn-login float-right" th:action="@{/logout}"
-              method="get">
+        <form style=" position: initial; margin-right: 15px; padding-top: 3px;" class="btn btn-login float-right" th:action="@{/logout}"
+              th:method="post">
             <button type="submit" class="btn btn-login">Loguit</button>
         </form>
     </div>
+    <div style="text-align: center; margin-left: 150px;"><h1 style="color:#3e64ff;">International Bank of HvA</h1></div>
 </nav>
 <form class="form" th:action="@{/rekeninghouderToevoegen(rekeningNr=${rekeningnummer})}" method="post">
     <h2>Rekeninghouder Toevoegen</h2>
-    <p  type="Gebruikersnaam:"><input id="gebruikersnaam" type="text" name="rekeninghouderGebruikersnaam" placeholder="Schrijft gebruikersnaam van rekeninghouder... "></input></p>
-    <p  type="Veiligcode:"><input id="code" type="password" name="veiligCode" placeholder="Scrijft een code van 5 cijfers..." maxlength="5" pattern="[0-9]{0,9}"></input></p>
-    <button id="error"  type="submit" >  SUBMIT  </button>
-    <button  formaction="/listParticulierRekeningen" type="button" onclick="history.back()" >TERUG</button>
-    <div id="message" style="margin: 90px 25px 0px 25px; width: 85%; text-align: center;">
+    <p  type="Gebruikersnaam:"><input id="gebruikersnaam" type="text" name="rekeninghouderGebruikersnaam" placeholder="Geef de gebruikersnaam van de rekeninghouder... "></input></p>
+    <p  type="Veiligcode:"><input id="code" type="password" name="veiligCode" placeholder="Geef een code van de 5 cijfers..." maxlength="5" minlength="5" pattern="[0-9]{0,9}"></input></p>
+    <button id="error" class="btn btn-login"  type="submit" >  Submit  </button>
+    <button  formaction="/listParticulierRekeningen" class="btn btn-login" type="button" onclick="history.back()" >Terug</button>
+    <div id="message" style="margin: 90px 25px 0px 30px; width: 87%; text-align: center;">
         <span style="color: red; font-size: 15px;" th:utext="${message}"></span>
     </div>
-    <div id="melding" style="margin: 25px 25px 0px 25px; width: 85%; text-align: center; visibility: hidden" >
-        <span style="color: #0069c0; font-size: 17px;"><i class="fa fa-exclamation-circle" style="color: red;" aria-hidden="true"></i>Je moet Gebruikersnaam en Veiligcode invoeren! </span>
+    <div id="melding" style="margin: 0px 25px 0px 30px; width: 87%; text-align: center; visibility: hidden" >
+        <span style="color: #0069c0; font-size: 17px;"><i class="fa fa-exclamation-circle" style="color: red;" aria-hidden="true"></i>Vul de gebruikersnaam en veiligcode in. </span>
     </div>
 </form>
 

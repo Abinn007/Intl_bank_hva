@@ -13,6 +13,7 @@ import java.util.Map;
 
 @Repository
 public interface TransactieRepository extends JpaRepository<Transactie, Integer> {
+
     List<Transactie> findAllByRekeningNrCredit(String RekeningNrCredit);
     List<Transactie> findAllByRekeningNrDebet(String RekeningNrDebet);
     List<Transactie> findAllByRekening(Rekening rekening);
@@ -23,7 +24,7 @@ public interface TransactieRepository extends JpaRepository<Transactie, Integer>
             "ON r.rekeningnummer = tr.rekening_nr_debet \n" +
             "GROUP BY bedrijfsnaam\n" +
             "HAVING bedrijfsnaam IS NOT NULL", nativeQuery = true)
-            List<Object[]> totaalDebitTransactie();
+            List<Object[]> totaalDebetTransactie();
 
 
     @Query(value = "SELECT  r.bedrijfsnaam, COUNT(rekening_nr_credit) AS total \n" +

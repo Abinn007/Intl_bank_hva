@@ -19,8 +19,8 @@ public class RekeninghouderVeiligCodeService {
         rekeninghouderVeiligCodeRepository.save(rekeninghouderVeiligCode);
     }
 
-    public RekeninghouderVeiligCode getByVeiligCode(int veiligCode) {
-        return rekeninghouderVeiligCodeRepository.findByVeiligCode(veiligCode);
+    public RekeninghouderVeiligCode getByRekeningId (int rekeningId) {
+        return rekeninghouderVeiligCodeRepository.findVeiligCode(rekeningId);
     }
 
 }

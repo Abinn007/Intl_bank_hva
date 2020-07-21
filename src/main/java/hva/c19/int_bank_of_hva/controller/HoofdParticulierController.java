@@ -1,6 +1,7 @@
 package hva.c19.int_bank_of_hva.controller;
 
 import hva.c19.int_bank_of_hva.model.Klant;
+import hva.c19.int_bank_of_hva.model.KlantRekening;
 import hva.c19.int_bank_of_hva.model.ParticulierRekening;
 import hva.c19.int_bank_of_hva.service.KlantService;
 import hva.c19.int_bank_of_hva.service.RekeningService;
@@ -16,12 +17,9 @@ public class HoofdParticulierController {
 
     @Autowired
     private KlantService klantService;
-    @Autowired
-    private RekeningService rekeningService;
 
     public HoofdParticulierController(KlantService klantService, RekeningService rekeningService) {
         this.klantService = klantService;
-        this.rekeningService = rekeningService;
     }
 
     @GetMapping("/hoofdParticulier")
@@ -31,18 +29,9 @@ public class HoofdParticulierController {
 
     @GetMapping("/hoofdParticulierenHoogsteSaldo")
     public String TopTienKlantenHandler(Model model) {
-        List<ParticulierRekening> topTienKlantenLijst = rekeningService.klantenMetHoogsteParticulierRekeningSaldo();
-        List<Klant> klantLijst = klantService.klantenMetHoogsteParticulierRekeningSaldoKlant();
+        List<KlantRekening> klantLijst = klantService.klantenMetHoogsteParticulierRekeningSaldoKlant();
         System.out.println(klantLijst);
-//        System.out.println(topTienKlantenLijst.get(1).getRekeningId());
-//        System.out.println(topTienKlantenLijst.get(1).toString());
-//        System.out.println(topTienKlantenLijst.get(1).);
-//      topTienKlantenLijst.get(1).getRekeningnummer();
-//      [[Voorletters Achternaam] Rekeningnummer Saldo,[Voorletters Achternaam] Rekeningnummer Saldo,[Voorletters Achternaam]Rekiningnummer Saldo,[Voorletters]Rekiningnummer Saldo,]
-
-        model.addAttribute("topTienKlantenLijst", topTienKlantenLijst);
         model.addAttribute("klantLijst", klantLijst);
-
         return "hoofdParticulierenHoogsteSaldo";
     }
 }

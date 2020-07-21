@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "Rekening")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -77,6 +78,21 @@ public abstract class Rekening {
         BigDecimal bd = new BigDecimal(Double.toString(value));
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Rekening)) return false;
+        Rekening rekening = (Rekening) o;
+        return getRekeningId() == rekening.getRekeningId() &&
+                Double.compare(rekening.getSaldo(), getSaldo()) == 0 &&
+                Objects.equals(getRekeningnummer(), rekening.getRekeningnummer());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRekeningId(), getRekeningnummer(), getSaldo());
     }
 
     @Override

@@ -4,43 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overmaken Geld</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" th:href="@{css/overmakenGeld.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
     <script type="application/javascript" th:src ="@{js/overmakenGeld.js}"></script>
 </head>
-<br></br>
-<h1>Vul de benodigde gegevens in om geld over te maken</h1>
-<h3>Uw saldo is: <span th:text="${saldo}"></span></h3>
+<body>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+            font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form class="btn btn-login float-right form-loguit" th:action="@{/logout}" method="get">
+            <button type="submit" class="btn btn-login btn-loguit">Loguit</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+    "><h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
+<br>
 
     <div style = "text-align: center">
-    <form th:action="@{geldTransactie}" method="post" th:object="${geldTransactieBean}">
+        <form class="form" th:action="@{geldTransactie}" method="post" th:object="${geldTransactieBean}">
+            <h2>Vul de benodigde gegevens in</h2>
+            <br>
+            <h3>Uw saldo is: <span id=saldo th:text="${#numbers.formatDecimal(saldo,1,'COMMA', 2,'POINT')}"></span></h3>
+            <br>
 
-        <label>Naar welk rekeningnummer u wilt overmaken:</label><br>
-        <label> <input name="rekeningnummer" th:field="*{rekeningNrCredit}" maxlength="18" pattern="NL35IBVH[1-2]{1}[0-9]{9}"
-            oninvalid="valid_rekeningnummer(this)" oninput="this.setCustomValidity('')" placeholder="NL35IBVH1234567890" required> </label><br>
+            <label>Naar welk rekeningnummer u wilt overmaken:</label><br>
+            <label> <input name="rekeningnummer" th:field="*{rekeningNrCredit}" maxlength="18" pattern="NL35IBVH[1-2]{1}[0-9]{9}"
+                           oninvalid="validateRekeningnummer(this)" oninput="this.setCustomValidity('')" placeholder="NL35IBVH1234567890" required> </label><br>
 
-        <label>Welk bedrag wilt u overmaken:</label><br>
-        <label> <input name="bedrag" th:field="*{transactieBedrag}" pattern="^\d+(?:,\d{3})*\.\d{2}$"
-                       oninvalid="valid_amount(this)" oninput="this.setCustomValidity('')" required></label><br>
+            <label>Welk bedrag wilt u overmaken:</label><br>
+            <label> <input type="number" name="bedrag" onchange="setTwoNumberDecimal(this)" th:field="*{transactieBedrag}"
+                           min="0.01" max="1000000000" value="0.00" step="0.01" placeholder="0.00" required></label><br>
 
-        <label>U kunt eventueel een bericht schrijven van max. 150 karakters:</label><br>
-        <label> <input style="row-gap: inherit" name="bericht" th:field="*{beschrijving}" pattern="[A-Za-z0-9]{1,150}" ></label><br><br>
+            <label>U kunt eventueel een bericht schrijven:</label><br>
+            <label> <input style="row-gap: inherit" name="bericht" th:field="*{beschrijving}" maxlength="150" placeholder="Maximaal 150 karakters"></label><br><br>
 
-
-    <div class="button_position">
-        <button class="button" style="background-color: #28a745"
-                name="submit" formaction="/geldTransactie" value="verder"
-                type="submit">Geld overmaken bevestigen</button>
-
-        <button class="button" style="background-color: orange"
-            name="terug" value="goToWelcome" type="button"
-            onclick="history.back()">Terug</button>
-
-        <button class="button" style="background-color: tomato"
-            name="uitloggen" formaction="/home" value="logout"
-            type="submit">Uitloggen</button>
-    </div>
-    </form>
+            <div class="button_position">
+                <button class="button" name="submit" style="background-color: #3e64ff" formaction="/geldTransactie" value="verder" type="submit">Geld Overmaken Bevestigen</button>
+                <button class="button" name="submit" style="background-color: #3e64ff" value="goToWelcome" type="button" onclick="history.back()">Terug</button>
+            </div>
+        </form>
     </div>
 </body>
 </html>

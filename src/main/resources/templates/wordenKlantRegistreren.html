@@ -4,24 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nieuwe klant</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" th:href="@{css/wordenKlantRegistreren.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabel.css}">
 
 </head>
 <body>
-<h1>International Bank of HvA</h1>
-<form th:object="${klant}">
-<h2>Bevestiging van inschrijving</h2><br>
-<P>Welkom <span th:text="${klant.getVoornaam()}"> </span> <span th:text="${klant.getTussenvoegsel()}"> </span>
-    <span th:text="${klant.getAchternaam()}"></span>,</P>
-    <p>u bent nu geregistreerd bij International Bank of HvA.</P>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px; font-size: 60px;
+              color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form style=" position: initial; margin-right: 15px; padding-top: 3px;" class="btn btn-login float-right" th:action="@{/logout}"
+              method="post">
+            <button type="submit" class="btn btn-login btn-loguit">Loguit</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+    "><h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
+<form class="form" th:object="${klant}">
+    <h2>Bevestiging van inschrijving</h2><br><br>
+    <P>Welkom <span th:text="${klant.getVoornaam()}"> </span> <span
+            th:text="${klant.getTussenvoegsel()}"> </span>
+        <span th:text="${klant.getAchternaam()}"></span>,</P>
+    <p>u bent nu geregistreerd bij International Bank of HvA.</P><br>
+    <p> Open nu een rekening en ontvang € 25,00 cadeau.</p>
     <div class="button_position">
-        <button class="button" style="background-color: tomato" formaction="\" name="afsluiten" value="Afsluiten"
-                type="submit">Afsluiten
-        </button>
-        <button class="button" style="background-color: #4CAF50;" formaction="openen_rekening" name="submit"
-                value="RekeningOpenen" type="submit">Een rekening openen
-        </button>
+        <button class="button" formaction="openen_rekening" name="submit"
+                value="RekeningOpenen" type="submit">Een rekening openen</button>
     </div>
 </form>
 </body>

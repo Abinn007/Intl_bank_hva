@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klantgegevens</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/algemeenTabelVoorLijsten.css}">
+</head>
+<body>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+  font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form class="btn btn-login float-right form-loguit">
+            <button type="button" class="btn btn-login btn-loguit" onclick="history.back()">Terug</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+    "><h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
+<div align="center">
+    <form  th:object="${klanten}">
+        <table>
+            <tr>
+                <th colspan="5" style="background-color: #e6e6e6; color: #3e64ff; padding:1px; font-size:20px">
+                    <p>Klantgegevens</p>
+                </th>
+            </tr>
+            <tr style="background-color: darkgrey; color:black;font-size: 17px; text-align: center">
+                <th>KlantNr</th>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;Klant&nbsp;Naam&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>&nbsp;&nbsp;Straat&nbsp;&&nbsp;Huisnummer&nbsp;&nbsp;</th>
+                <th>Postcode&nbsp;&&nbsp;Woonplaats</th>
+                <th>Emailadres</th>
+            </tr>
+            <tr>
+            <tr th:each="klant : ${klanten}">
+                <td style="text-align: center" th:text="${klant.klantNr}"></td>
+                <td style="text-align: center" th:text="${klant.voorletters} + ' ' + ${klant.achternaam}"></td>
+                <td style="text-align: center" th:text="${klant.straat} + ' ' + ${klant.huisnummer}"></td>
+                <td style="text-align: center" th:text="${klant.postcode} + ' ' + ${klant.woonplaats}"></td>
+                <td style="text-align: center" th:text="${klant.emailadres}"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

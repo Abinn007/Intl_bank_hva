@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" th:href="@{css/openenRekening.css}">
     <title>Particulier Rekening Openen</title>
 </head>
-<body th:object="${klant}">
-    <h1> International Bank of HvA </h1>
-    <h2> Een particuliere rekening openen voor: </h2>
-    <h3> <span th:text="${klant.voornaam} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}"></span></h3>
-    <h3> De volgende gegevens zullen aan uw rekening gekoppeld worden: </h3>
-    <form th:action="@{openen_rekening_particulier}" method="get">
-        <table>
-            <tr>
-                <td>Naam:
-                <label><span th:text="${klant.voorletters} + ' ' + ${klant.tussenvoegsel} + ' ' + ${klant.achternaam}"></span></label>
-                </td>
-            </tr>
-            <tr>
-                <td>BSN:
-                <label><span th:text="${klant.bsn}"></span></label>
-                </td>
-            </tr>
-        </table><br><br>
-        <div class="button_position">
-            <button class="button" style="background-color: #28a745"
-                    name="submit" type="submit">AANVRAAG STUREN</button>
-            <button class="button" style="background-color: orange"
-                    name="terug" value="goToWelcome" type="button" onclick="history.back()">TERUG</button>
-            <button class="button" style="background-color: tomato"
-                    name="submit" formaction="/home" value="returnHome" type="submit">UITLOGGEN</button>
-        </div>
-    </form>
+<body>
+<nav class="home">
+    <div class="icon">
+        <a href="/home"><i style="width: 36px;
+  font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
+        <form style=" position: initial; margin-right: 15px; padding-top: 3px;" class="btn btn-login float-right" th:action="@{/logout}"
+              method="get">
+            <button type="submit" class="btn btn-login">Loguit</button>
+        </form>
+    </div>
+    <div style=" text-align: center;
+    color:#3e64ff;
+    margin-top: -45px;
+    margin-left: 150px;
+    "><h1 style="font-size: 30px; font-weight: bold;">International Bank of HvA</h1></div>
+</nav>
+<form class="form" th:action="@{openen_rekening_particulier}" method="get">
+    <h2> Particuliere rekening openen </h2>
+    <p style="color: #3e64ff; font-weight: bold"> <span th:text="${klant.voornaam} + ' ' + ${klant.achternaam}"></span></p>
+    <p> De volgende gegevens zullen aan uw rekening gekoppeld worden: </p>
+    <table class="display">
+        <tr>
+            <td>Naam:
+                <label ><span th:text="${klant.voorletters} + ' ' + ${klant.achternaam}"></span></label>
+            </td>
+        </tr>
+        <tr>
+            <td>BSN:
+                <label ><span th:text="${klant.bsn}"></span></label>
+            </td>
+        </tr>
+    </table><br>
+    <button class="button" name="submit" style="background-color: #3e64ff" type="submit">Aanvraag Sturen</button>
+    <button class="button" name="terug" style="background-color: #3e64ff" value="goToWelcome" type="button" onclick="history.back()">Terug</button>
+</form>
 </body>
 </html>

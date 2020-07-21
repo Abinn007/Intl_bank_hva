@@ -3,9 +3,10 @@ html,body {
     padding: 0;
     height: 100%;
     background-size: cover;
-    background: linear-gradient(to bottom right, #47a7ff, #0554a1) no-repeat;
+    background-color: #6ec6ff;
     font-family: "Montserrat", sans-serif;
 }
+
 h1{
     text-align: center;
     color: aliceblue;

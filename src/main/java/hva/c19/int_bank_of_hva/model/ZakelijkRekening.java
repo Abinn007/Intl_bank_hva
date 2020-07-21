@@ -2,6 +2,7 @@ package hva.c19.int_bank_of_hva.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity(name = "ZakelijkRekening")
@@ -65,6 +66,23 @@ public class ZakelijkRekening extends Rekening {
 
     public void setSector(String sector) {
         this.sector = sector;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ZakelijkRekening)) return false;
+        if (!super.equals(o)) return false;
+        ZakelijkRekening that = (ZakelijkRekening) o;
+        return getKvkNummer() == that.getKvkNummer() &&
+                getBedrijfsnaam().equals(that.getBedrijfsnaam()) &&
+                getBtwNummer().equals(that.getBtwNummer()) &&
+                getSector().equals(that.getSector());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getBedrijfsnaam(), getKvkNummer(), getBtwNummer(), getSector());
     }
 
     @Override

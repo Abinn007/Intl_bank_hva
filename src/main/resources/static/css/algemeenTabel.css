@@ -1,7 +1,12 @@
-body{
-    background-color: #0779e4;
-    background-size:1500px 800px;
+html,body{
+    margin:0;
+    padding: 0;
+    height: 100%;
+    background-size: cover;
+    background-color: #6ec6ff;
+    font-family: "Montserrat", sans-serif;
 }
+
 table{
     border:1px solid black;
     border-collapse:collapse ;
@@ -11,9 +16,9 @@ table{
 
 }
 th{
-     padding:10px;
-     border:1px solid black;
- }
+    padding:10px;
+    border:1px solid black;
+}
 
 td{
     padding:10px;
@@ -27,27 +32,38 @@ tr:nth-child(even){
 tr:nth-child(odd){
     background-color:#e6e6e6;
 }
-h1{
-    color: aliceblue;
-    margin-top: 20px;
-}
-.button{
+
+.button {
     background-color: orange;
     border: none;
     color: white;
     padding: 10px 24px;
     text-align:center;
     text-decoration: none;
-    display: inline-block;
     font-size: 14px;
     margin: 30px 10px;
     cursor: pointer;
-    opacity: 0.9;
     margin-top: 25px;
+    position: relative;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -ms-transform: scale(1.05, 1.05);
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    font-family: "Montserrat", sans-serif;
+    opacity: 0.9;
 }
-.button:hover{
+
+.button:hover {
+    -webkit-transform: scale(1.05, 1.05);
+    -ms-transform: scale(1.05, 1.05);
+    transform: scale(1.05, 1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    font-family: "Montserrat", sans-serif;
     opacity: 1;
 }
+
 .title {
     background-color: darkgrey;
     color: white;
@@ -56,4 +72,3 @@ h1{
     width: 39%;
     text-align:center;
 }
-

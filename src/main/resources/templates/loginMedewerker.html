@@ -16,14 +16,15 @@
         <a href="/home"><i style="width: 36px;
   font-size: 60px; color: #3e64ff; position: initial;" class="fa fa-home"></i></a>
     </div>
+    <div style="text-align: center;"><h1 style="color:#3e64ff;">International Bank of HvA</h1></div>
 </nav>
 <section class="login-block">
 
-    <div class="container">
+    <div class="container" style="height: 500px;">
         <div class="row ">
             <div class="col login-sec">
                 <h2 class="text-center">Login</h2>
-                <form class="login-form" th:action="@{/medewerkerInloggen}" method="get">
+                <form class="login-form" th:action="@{/medewerkerInloggen}" method="post">
                     <div class="form-group">
                         <label class="text">Gebruikersnaam</label>
                         <input id="username" type="text" name="gebruikersnaam" class="form-control"
@@ -40,18 +41,18 @@
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input">
-                            <small>Remember Me</small>
+                            <small>Onthoud mij</small>
                         </label>
                         <button id="error" type="submit" class="btn btn-login float-right">Submit</button>
                     </div>
-                    <div id="message" style="margin: 35px 25px 0px 25px; width: 85%; text-align: center;">
+                    <div id="message" style="margin: 35px 25px 0px 30px; width: 87%; text-align: center;">
                         <span th:utext="${message}"></span>
                     </div>
                     <div id="melding"
-                         style="margin: 5px 25px 0px 25px; width: 85%; text-align: center; visibility: hidden">
+                         style="margin: 5px 25px 0px 30px; width: 87%; text-align: center; visibility: hidden">
                         <span style="color: #0069c0; font-size: 17px;">
                             <i class="fa fa-exclamation-circle" style="color: red;" aria-hidden="true"></i>
-                            Je moet Gebruikersnaam en Wachtwoord invoeren!
+                            Vul uw ebruikersnaam en wachtwoord in.
                         </span>
                     </div>
                 </form>

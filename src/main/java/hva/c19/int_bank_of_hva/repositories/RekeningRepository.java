@@ -1,5 +1,6 @@
 package hva.c19.int_bank_of_hva.repositories;
 
+import hva.c19.int_bank_of_hva.model.Klant;
 import hva.c19.int_bank_of_hva.model.ParticulierRekening;
 import hva.c19.int_bank_of_hva.model.Rekening;
 import hva.c19.int_bank_of_hva.model.ZakelijkRekening;
@@ -15,11 +16,11 @@ import java.util.List;
 
 public interface RekeningRepository extends JpaRepository<Rekening, Integer> {
 
-    @Query(value = "select max(rekeningnummer) from rekening  where dtype = 'ParticulierRekening' ", nativeQuery = true)
-    String hoogsteParticulierRekeningnummer();
-
     @Query(value = "select max(rekeningnummer) from rekening  where dtype = 'ZakelijkRekening' ", nativeQuery = true)
     String hoogsteZakelijkRekeningnummer();
+
+    @Query(value = "select max(rekeningnummer) from rekening  where dtype = 'ParticulierRekening' ", nativeQuery = true)
+    String hoogsteParticulierRekeningnummer();
 
     @Query(value = "SELECT rekening_id, rekeningnummer, SUM(saldo) AS saldo, \n" +
             "bedrijfsnaam, btw_nummer, kvk_nummer, sector \n" +
@@ -53,6 +54,7 @@ public interface RekeningRepository extends JpaRepository<Rekening, Integer> {
     @Query(value = "UPDATE rekening r \n" +
             "SET r.saldo = r.saldo + :bedrag \n" +
             "WHERE r.rekeningnummer = :rekeningnr ;", nativeQuery = true)
+
     int maakGeldOverNaar(
             @Param("bedrag") double bedrag,
             @Param("rekeningnr") String rekeningnr);
@@ -68,12 +70,5 @@ public interface RekeningRepository extends JpaRepository<Rekening, Integer> {
             "JOIN klant k ON rk.klants_klant_nr = k.klant_nr WHERE k.gebruikersnaam = :gebruikersnaam " +
             "AND dtype = 'ZakelijkRekening';", nativeQuery = true)
     List<Rekening> zakelijkRekeningen(@Param("gebruikersnaam") String gebruikersnaam);
-
-    @Query(value = "SELECT r.rekening_id, rekeningnummer, SUM(r.saldo) AS saldo, " +
-            "k.klant_nr, k.aanhef, k.voorletters, k.tussenvoegsel, k.achternaam " +
-        "FROM rekening r JOIN rekening_klants rk ON r.rekening_id = rk.rekening_rekening_id " +
-        "JOIN klant k ON rk.klants_klant_nr = k.klant_nr WHERE dtype = 'ParticulierRekening' " +
-        "GROUP BY k.klant_nr ORDER BY saldo DESC LIMIT 10;", nativeQuery = true)
-    List<ParticulierRekening> klantenMetHoogsteSaldo();
 
 }

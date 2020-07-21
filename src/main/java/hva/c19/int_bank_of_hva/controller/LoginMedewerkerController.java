@@ -3,8 +3,10 @@ package hva.c19.int_bank_of_hva.controller;
 import hva.c19.int_bank_of_hva.model.Medewerker;
 import hva.c19.int_bank_of_hva.service.HoofdParticulierService;
 import hva.c19.int_bank_of_hva.service.HoofdZakelijkService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +16,11 @@ import java.security.NoSuchAlgorithmException;
 
 @Controller
 public class LoginMedewerkerController {
+    private final static String ERROR_LOGIN_MESSAGE = "<div style= 'margin-bottom: 5px; border: 2px solid red; color: #0069c0; font-size: 17px;" +
+            " border-radius: 5px;' ><i class= 'fa fa-exclamation-circle' style='color: red; aria-hidden=true'></i>  Uw inloggegevens kloppen niet.️</div>";
+    @Autowired
     private final HoofdParticulierService hoofdParticulierService;
+    @Autowired
     private final HoofdZakelijkService hoofdZakelijkService;
 
     public LoginMedewerkerController(HoofdParticulierService hoofdParticulierService, HoofdZakelijkService hoofdZakelijkService) {
@@ -23,7 +29,7 @@ public class LoginMedewerkerController {
         this.hoofdZakelijkService = hoofdZakelijkService;
     }
 
-    @GetMapping("medewerkerInloggen")
+    @RequestMapping("medewerkerInloggen")
     public ModelAndView handleMedewerkerInloggen(@RequestParam String gebruikersnaam, @RequestParam String wachtwoord) {
         ModelAndView mav = null;
         Medewerker particulierMedewerker = hoofdParticulierService.getMedewerkerByGebruikersnaam(gebruikersnaam);
@@ -37,8 +43,7 @@ public class LoginMedewerkerController {
            }
         } else {
             mav = new ModelAndView("loginMedewerker");
-            mav.addObject("message", "<div style= 'margin-bottom: 5px; border: 2px solid red; color: #0069c0; font-size: 17px;" +
-                    " border-radius: 5px;' ><i class=\"fa fa-exclamation-circle\" style=\"color: red;\" aria-hidden=\"true\"></i>  Je inloggegevens kloppen niet, controleer de combinatie van je gebruikersnaam en wachtwoor.️</div>");
+            mav.addObject("message", ERROR_LOGIN_MESSAGE );
         }
         return mav;
     }

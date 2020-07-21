@@ -7,28 +7,36 @@ import hva.c19.int_bank_of_hva.repositories.TransactieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
 @Service
 public class TransactieService {
-    @PersistenceContext
-    private EntityManager em;
-
     @Autowired
     private final TransactieRepository transactieRepository;
 
     @Autowired
     private final RekeningRepository rekeningRepository;
 
+
+    // Constructors
+    public TransactieService(){
+        this(null,null);
+    }
+
     public TransactieService(TransactieRepository transactieRepository, RekeningRepository rekeningRepository) {
         this.transactieRepository = transactieRepository;
         this.rekeningRepository = rekeningRepository;
     }
 
+    // Methods
+    /**
+     * Deze methode voert een geldtransactie uit en slaat de transactie op.
+     *
+     * @Transactional Alles in de body van de methode lukt, of niks.
+     *
+     * @param transactie Bevat de benodigde, in de view ingevulde, informatie.
+     */
     @Transactional
     public void maakGeldOver(Transactie transactie) {
         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
@@ -40,23 +48,10 @@ public class TransactieService {
         rekeningDebet.setSaldo(rekeningDebet.getSaldo() - transactie.getTransactieBedrag());
 
         saveTransactie(transactie);
-        em.persist(transactie);
     }
 
     public boolean bestaandRekeningNr(String rekeningnr) {
         return rekeningRepository.findByRekeningnummer(rekeningnr) != null;
-    }
-
-    public List<Transactie> transactieListCredit(String rekeningNrCredit) {
-        return transactieRepository.findAllByRekeningNrCredit(rekeningNrCredit);
-    }
-
-    public List<Transactie> transactieListDebet(String rekeningNrDebet) {
-        return transactieRepository.findAllByRekeningNrCredit(rekeningNrDebet);
-    }
-
-    public List<Transactie> transactieList(Rekening rekening) {
-        return transactieRepository.findAllByRekening(rekening);
     }
 
     public List<Transactie> transactieList(String rekeningnummer) {
@@ -77,9 +72,9 @@ public class TransactieService {
      *
      * @return lijst debit transacties
      */
-    private Map<String, Integer> totaalDebitTransacties() {
+    private Map<String, Integer> totaalDebetTransacties() {
         Map<String, Integer> debetTransacties = new HashMap<>();
-        for (Object[] transacties : transactieRepository.totaalDebitTransactie()) {
+        for (Object[] transacties : transactieRepository.totaalDebetTransactie()) {
             debetTransacties.put((String) transacties[0], ((Number) transacties[1]).intValue());
         }
         return debetTransacties;
@@ -104,7 +99,7 @@ public class TransactieService {
      * @return lijst met totaal transacties.
      */
     private Map<String, Integer> totaalTransacties() {
-        Map<String, Integer> debetTransacties = totaalDebitTransacties();
+        Map<String, Integer> debetTransacties = totaalDebetTransacties();
         Map<String, Integer> creditTransacties = totaalCreditTransacties();
         Map<String, Integer> totaalTransacties = new HashMap<>(debetTransacties);
         for (String i : creditTransacties.keySet()) {
@@ -146,18 +141,15 @@ public class TransactieService {
      * @return
      */
     private Comparator<Map.Entry<String, Integer>> entryComparator() {
-        return new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) {
-                Integer v1 = e1.getValue();
-                Integer v2 = e2.getValue();
-                return v2.compareTo(v1);
-            }
+        return (e1, e2) -> {
+            Integer v1 = e1.getValue();
+            Integer v2 = e2.getValue();
+            return v2.compareTo(v1);
         };
     }
 
     /**
-     * Om een aantal hoogste transacties te laten zien op een willekeurige nummer.
+     * Om een aantal hoogste transacties te laten zien op een willekeurige aantal.
      *
      * @param aantal willekeurige nummer
      * @return transactie lijst

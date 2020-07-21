@@ -9,9 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 @Controller
 @SessionAttributes("rekeningnummer")
 public class OvermakenGeldController {
@@ -38,7 +35,6 @@ public class OvermakenGeldController {
         rekeningDebet = rekeningService.getRekeningByRekeningNr(rekeningnummer);
         rekeningNrDebet = rekeningnummer;
         double saldo = rekeningDebet.getSaldo();
-
         model.addAttribute("geldTransactieBean", transactie);
         model.addAttribute("saldo", saldo);
         return "overmakenGeld";

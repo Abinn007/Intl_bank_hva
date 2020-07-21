@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Forgot Password</title>
+    <title>Reset Wachtwoord</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,49 +10,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">-->
     <link rel="stylesheet" type="text/css" th:href="@{css/generalLayout.css}">
 </head>
-<style type="text/css">
-    nav {
-        width: 100%;
-        height: 70px;
-        background-color: #e6e6e6;
-        margin-bottom: 40px;
-        text-align: left;
-        -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
-    }
-    .icon {
-        margin-left: 30px;
-        /*    margin-top: 30px;*/
-    }
-
-</style>
-<body  class="text-center">
-<nav class="home">
-    <div class="icon">
-        <a href="/home"><i style="width: 36px;
-  font-size: 50px; color: #3e64ff; position: relative; margin-top: 5px;" class="fa fa-home"></i></a>
-
-    </div>
-</nav>
+<body>
+<h2 style="margin-top: 50px;">Invoer een nieuwe wachtwoord:</h2>
 <div  class="container" style="width:40%;!important;">
-
-    <form action="#" th:action="@{/forgot-password}"  method="post">
+    <form action="#" th:action="@{/reset-wachtwoord}" th:object="${klant}" method="post">
 
         <table class="table table-bordered table-striped" style="background-color:	#D5D6E8;color: black">
             <thead style="background-color: #e6e6e6;color: black;!important;">
             <tr>
                 <td><label style="color: #5a5a5a;!important;" >Gebruikersnaam</label></td>
-                <td><input id="username" name="gebruikersnaam" type="text">
+                <td><input id="username"  th:field="*{gebruikersnaam}" type="text" name="gebruikersnaam" >
+            </tr>
+            <tr>
+                <td><label style="color: #5a5a5a;!important;">Wachtwoord</label></td>
+                <td><input id="password" th:field="*{wachtwoord}" type="password" name="wachtwoord" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"></td>
             </tr>
             </thead>
             <tbody >
-            <td><input style="background-color: #3e64ff; color: white "  type="reset" value="Clear"/></td>
-            <td><input id="error" style="background-color: #3e64ff; color: white " type="submit" value="Reset Password"></input></td>
 
+            <td><input style="background-color: #3e64ff; color: white " type="reset" value="Clear"/></td>
+            <td><input id="error" style="background-color: #3e64ff; color: white " type="submit" value="Submit"></td>
             </tbody>
         </table>
     </form>
@@ -60,7 +39,7 @@
         <span style="color: white; font-size: 17px;" th:utext="${message}"></span>
     </div>
     <div id="melding" style="margin: 0px 25px 0px 25px; width: 85%; text-align: center; visibility: hidden; ">
-        <span style="color: white; font-size: 17px; "><i class="fa fa-exclamation-circle" style="color: red; font-size: 20px;" aria-hidden="true"></i>  Je moet Gebruikersnaam invoeren! </span>
+        <span style="color: white; font-size: 17px; "><i class="fa fa-exclamation-circle" style="color: red; font-size: 20px;" aria-hidden="true"></i>  Je moet Gebruikersnaam en Wachtwoord invoeren. </span>
     </div>
 </div>
 </body>
@@ -69,8 +48,9 @@
     $(function () {
         $("#error").on("click", function () {
             var userName = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
 
-            if (userName == "") {
+            if (userName == "" || password == "") {
                 document.getElementById("melding").style.visibility = "visible";
                 return false;
             } else {
