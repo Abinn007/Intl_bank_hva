@@ -29,7 +29,7 @@
         <span class="alert" style="font-size: 18px;" th:text="${error}"></span>
     </div>
 
-    <div class="grid-container2">
+    <div class="grid-container-double">
         <label>Voorletters:*
             <input class="uppercase input2" name="voorletters" th:field="*{voorletters}" pattern="[a-zA-Z. ]*"
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required/> </label>
@@ -39,7 +39,7 @@
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
     </div>
 
-    <div class="grid-container2 ">
+    <div class="grid-container-double ">
         <label>Tussenvoegsel:
             <input class="input2" name="tussenvoegsel" th:field="*{tussenvoegsel}" pattern="[a-zA-Z ]*"
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')"> </label>
@@ -48,9 +48,9 @@
             <input class="capitalize input2" name="achternaam" th:field="*{achternaam}" pattern="[a-zA-Z ]*"
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
     </div>
-    <div class="grid-container2">
+    <div class="grid-container-double">
         <label>BSN:*
-            <input class="input2" name="bsn" th:field="*{bsn}" placeholder="123456789" maxlength="9"
+            <input class="input2" name="bsn" th:field="*{bsn}" placeholder="123456789" maxlength="9" minlength="9"
                    pattern="[0-9]{9,9}"
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>
 
@@ -58,7 +58,7 @@
             <input style="color: dimgray" class=" input2" name="geboortedatum" type="date" id="geboortedatum"
                    onkeyup="dobValidate()" oninput="setCustomValidity('')" th:field="*{geboortedatum}" required></label>
     </div>
-    <div class="grid-container2">
+    <div class="grid-container-double">
         <label>Emailadres:*
             <input class="input2" type="email" name="emailadres" th:field="*{emailadres}" placeholder="test@example.com"
                    required> </label>
@@ -66,7 +66,7 @@
         <label>Gebruikersnaam:*
             <input class="input2" th:field="*{gebruikersnaam}" required> </label>
     </div>
-    <div class="grid-container2">
+    <div class="grid-container-double">
         <label>Wachtwoord:*
             <input class="input2" id="password" name="password" type="password" required th:field="*{wachtwoord}"
                    placeholder="min 8 tekens,1hoofd,1klein & 1cijfer/sp.char"
@@ -79,7 +79,7 @@
     </div>
 
     <p>Adresgegevens</p>
-    <div class="grid-container3">
+    <div class="grid-container-triple">
         <label>Postcode:*
             <input class="uppercase input3" name="postcode" id="postcode" th:field="*{postcode}" maxlength="7"
                    pattern="[0-9]{4}[A-Za-z- ]*"
@@ -95,7 +95,7 @@
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')"> </label>
     </div>
 
-    <div class="grid-container2">
+    <div class="grid-container-double">
         <label>Straat:*
             <input class="capitalize input2" name="straatnaam" th:field="*{straat}" pattern="[a-zA-Z- ]*"
                    oninvalid="validatie(this)" oninput="this.setCustomValidity('')" required> </label>

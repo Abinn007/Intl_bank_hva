@@ -12,7 +12,7 @@
     <artifactId>int_bank_of_hva</artifactId>
     <version>2.1.0</version>
     <name>int_bank_of_hva</name>
-    <description>Demo project for Spring Boot</description>
+    <description>A Spring Boot project</description>
 
     <properties>
         <java.version>11</java.version>

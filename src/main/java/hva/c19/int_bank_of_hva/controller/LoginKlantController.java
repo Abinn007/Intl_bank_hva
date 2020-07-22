@@ -55,7 +55,6 @@ public class LoginKlantController {
         ModelAndView mav = null;
         String veiligeWachtwoord = getGehashedWachtwoord(wachtwoord, SALT);
         Klant klant = klantService.findKlantByGebruikersnaam(gebruikersnaam);
-        System.out.println(klant);
         if (klant != null && klant.getGebruikersnaam().equals(gebruikersnaam) && klant.getWachtwoord().equals(veiligeWachtwoord)) {
             mav = new ModelAndView("welkom");
             mav.addObject("klant", klant);

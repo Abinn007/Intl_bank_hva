@@ -38,19 +38,19 @@ html,body {
 .uppercase{
     text-transform: uppercase;
 }
-.grid-container1 {
+.grid-container-single {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-row-gap: 1px;
     grid-column-gap: 10px;
 }
-.grid-container2 {
+.grid-container-double {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-row-gap: 1px;
     grid-column-gap: 50px;
 }
-.grid-container3 {
+.grid-container-triple {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 1px;
